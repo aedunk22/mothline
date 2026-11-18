@@ -1,0 +1,4 @@
+let context;let muted=false;
+function unlockAudio(){try{context??=new(window.AudioContext||window.webkitAudioContext)();context.resume();}catch{}}
+function toggleSound(){muted=!muted;return !muted;}
+function tone(kind,n=0){if(!context||muted)return;const now=context.currentTime;const sounds={seed:[590+n*28,1020+n*32,.12,'sine'],bank:[280,900,.45,'triangle'],dash:[190,55,.22,'sawtooth'],hit:[130,35,.3,'sawtooth'],break:[230,680,.17,'triangle'],win:[440,880,.7,'sine'],lose:[260,90,.7,'triangle']};const[a,b,d,type]=sounds[kind],o=context.createOscillator(),g=context.createGain();o.type=type;o.frequency.setValueAtTime(a,now);o.frequency.exponentialRampToValueAtTime(b,now+d);g.gain.setValueAtTime(.0001,now);g.gain.exponentialRampToValueAtTime(.09,now+.015);g.gain.exponentialRampToValueAtTime(.0001,now+d);o.connect(g);g.connect(context.destination);o.start(now);o.stop(now+d+.02);}
