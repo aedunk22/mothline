@@ -1,3 +1,6 @@
+// Mothline is a canvas game about a moth courier in the Lantern Garden.
+// This entry copies the game and screenshots into the output directory.
+// It hands in Mothline by writing the game's dossier for the judge.
 // A working best-game-01 entry (Node 22, standard library only): the game is this directory's
 // game/ folder, plain static files a desktop browser loads offline (game/index.html and its ES
 // modules, no library and no network request), and the program hands it in. It copies game/ and
@@ -21,6 +24,7 @@ const here = fileURLToPath(new URL('.', import.meta.url));
 const out = process.env.MAKEFUN_OUTPUT_DIR ?? '/output';
 
 mkdirSync(out, { recursive: true });
+if (!existsSync(join(here, 'game', 'index.html'))) throw new Error('Cannot hand in Mothline: game/index.html is missing.');
 cpSync(join(here, 'game'), join(out, 'game'), { recursive: true });
 mkdirSync(join(out, 'screenshots'), { recursive: true });
 if (existsSync(join(here, 'screenshots'))) cpSync(join(here, 'screenshots'), join(out, 'screenshots'), { recursive: true });

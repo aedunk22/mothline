@@ -1,3 +1,5 @@
+// WebAudio creates short oscillator tones with pitch sweeps and gain envelopes.
+// The audio context unlocks on interaction, and a mute flag gates playback.
 let context;let muted=false;
 function unlockAudio(){try{context??=new(window.AudioContext||window.webkitAudioContext)();context.resume();}catch{}}
 function toggleSound(){muted=!muted;return !muted;}

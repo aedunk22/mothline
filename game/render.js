@@ -1,3 +1,5 @@
+// Each canvas frame redraws the garden, beacon, actors, and transient effects.
+// Game state and elapsed time drive animation, with saved canvas transforms.
 const TAU=Math.PI*2;
 const stars=Array.from({length:120},(_,i)=>({x:(Math.sin(i*83.21)*.5+.5)*1200,y:(Math.cos(i*32.7)*.5+.5)*800,r:i%3*.5+.5}));
 function circle(c,x,y,r,color,fill=true){c.beginPath();c.arc(x,y,r,0,TAU);c[fill?'fillStyle':'strokeStyle']=color;c[fill?'fill':'stroke']();}
